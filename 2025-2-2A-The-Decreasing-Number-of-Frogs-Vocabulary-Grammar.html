@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>2025-2 2A - The Decreasing Number of Frogs - Vocabulary & Grammar Quiz</title>
+    <style>
+        :root {
+            --bg-color: #f0f7f4;
+            --primary-navy: #2d5a27; /* Frog Green theme */
+            --accent-orange: #e67e22;
+            --text-dark: #2c3e50;
+            --white: #ffffff;
+            --error-red: #e74c3c;
+            --success-green: #27ae60;
+            --base-font: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "Yu Gothic", "Meiryo", sans-serif;
+        }
+
+        body {
+            font-family: var(--base-font);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-navy);
+            color: var(--white);
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.3rem;
+            padding: 0 10px;
+        }
+
+        .print-trigger-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .container {
+            max-width: 750px;
+            width: 90%;
+            margin: 20px 0;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .progress-bar {
+            font-size: 1rem;
+            color: var(--primary-navy);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .instruction {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: bold;
+            background: #e8f5e9;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .sentence-display {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin: 10px 0 25px 0;
+            padding: 18px;
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--primary-navy);
+            border-radius: 5px;
+            text-align: left;
+            white-space: pre-line;
+        }
+
+        .choices-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 500px) {
+            .choices-grid { grid-template-columns: 1fr; }
+        }
+
+        .choice-btn {
+            background: var(--white);
+            border: 2px solid #bdc3c7;
+            padding: 12px 8px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .choice-btn:hover { background-color: #f1f2f6; border-color: var(--primary-navy); }
+        .choice-btn.wrong { background-color: #fab1a0; border-color: var(--error-red); color: var(--error-red); animation: shake 0.3s; }
+
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            25% {transform: translateX(-5px);}
+            75% {transform: translateX(5px);}
+        }
+
+        #result-screen { display: none; }
+        .score-num { font-size: 3rem; color: var(--accent-orange); font-weight: bold; }
+
+        .mistake-list {
+            text-align: left;
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ffcdd2;
+        }
+
+        .action-btn {
+            background-color: var(--primary-navy);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        @media print {
+            header, .container, .print-trigger-btn { display: none !important; }
+            #print-worksheet { display: block !important; width: 100%; }
+            .print-q-block { break-inside: avoid; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+            .print-sentence { font-style: italic; margin: 5px 0; border-left: 2px solid #000; padding-left: 10px; }
+        }
+
+        @media screen { #print-worksheet { display: none; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>2025-2 2A - The Decreasing Number of Frogs Quiz</h1>
+    <button class="print-trigger-btn" onclick="window.print()">🖨️ 全問題を印刷/PDF保存</button>
+</header>
+
+<div class="container" id="quiz-screen">
+    <div class="progress-bar" id="progress">1 / 41</div>
+    <div class="instruction" id="instruction-text">指示文</div>
+    <div class="sentence-display" id="sentence-text">問題文</div>
+    <div class="choices-grid" id="choices-container"></div>
+    <div id="feedback" style="margin-top:15px; height: 1.2em; font-weight: bold;"></div>
+</div>
+
+<div class="container" id="result-screen">
+    <h2>Result</h2>
+    <div>Score: <span class="score-num" id="final-score">0</span> / <span id="total-count">41</span></div>
+    <div id="mistake-container" style="display:none;">
+        <div class="mistake-list" id="mistake-list"></div>
+    </div>
+    <button class="action-btn" onclick="sendEmail()">Tamaki先生に結果を送信</button>
+    <button class="action-btn" style="background-color: #95a5a6;" onclick="location.reload()">もう一度挑戦</button>
+</div>
+
+<div id="print-worksheet"></div>
+
+<script>
+const quizList = [
+    { id: 1, instruction: "文中の「facing」の意味として最も適切なものを選びなさい。", sentence: "Many wild animals are now facing the danger of losing their homes. They need our help to survive.", a: "〜に直面している", c: ["〜を避けている", "〜を忘れている", "〜を探している"] },
+    { id: 2, instruction: "文中の「disappearing」の意味として最も適切なものを選びなさい。", sentence: "The small birds are disappearing from this forest. We cannot see them anymore.", a: "姿を消している", c: ["姿を見せている", "数を増やしている", "声を出している"] },
+    { id: 3, instruction: "文中の「the planet」が指すものとして最も適切なものを選びなさい。", sentence: "We must protect all living things on the planet. This is the only home we have.", a: "地球", c: ["月面", "太陽", "森林"] },
+    { id: 4, instruction: "空欄に入る最も適切な形を選びなさい。", sentence: "It [  ?  ] for a long time that these flowers are very rare. Many people visit the mountain to see them.", a: "has been known", c: ["is knowing", "has knew", "was know"] },
+    { id: 5, instruction: "文中の「species」の意味として最も適切なものを選びなさい。", sentence: "There are many different species of fish in this river. Each one has a unique color.", a: "（生物の）種", c: ["（土地の）数", "（季節の）型", "（活動の）場"] },
+    { id: 6, instruction: "文中の「major」の意味として最も適切なものを選びなさい。", sentence: "The city is dealing with three major problems. The most important one is the lack of water.", a: "主要な・重大な", c: ["控えめな・軽度な", "個人的な・特殊な", "一過性の・急激な"] },
+    { id: 7, instruction: "文中の「diseases」の意味として最も適切なものを選びなさい。", sentence: "Dirty water can cause dangerous diseases. People need clean water to stay healthy.", a: "病気", c: ["事故", "天候", "事件"] },
+    { id: 8, instruction: "文中の「loss of」の意味として最も適切なものを選びなさい。", sentence: "The loss of forests makes it difficult for monkeys to find food. We should plant more trees.", a: "〜を失うこと", c: ["〜を育てること", "〜を探すこと", "〜を守ること"] },
+    { id: 9, instruction: "空欄に入る最も適切な形を選びなさい。", sentence: "The two events were closely [  ?  ] to each other. When one happened, the other followed.", a: "connected", c: ["connect", "connecting", "connection"] },
+    { id: 10, instruction: "文中の「pollution」の意味として最も適切なものを選びなさい。", sentence: "Air pollution is a big problem in large cities. It makes it hard for people to breathe.", a: "汚染", c: ["発展", "保護", "建設"] },
+    { id: 11, instruction: "文中の「natural disasters」の意味として最も適切なものを選びなさい。", sentence: "Earthquakes and floods are common natural disasters. They can cause a lot of damage.", a: "自然災害", c: ["自然保護", "自然現象", "自然環境"] },
+    { id: 12, instruction: "文中の「development」の意味として最も適切なものを選びなさい。", sentence: "The development of new technology has changed our lives. Now we can talk to anyone instantly.", a: "開発・発達", c: ["停止・後退", "破壊・衰退", "調査・分析"] },
+    { id: 13, instruction: "文中の「medicine」の意味として最も適切なものを選びなさい。", sentence: "Doctors use medicine to help people feel better. It is important to follow their advice.", a: "薬・医学", c: ["食料・栄養", "運動・体操", "道具・器械"] },
+    { id: 14, instruction: "空欄に入る最も適切な関係詞を選びなさい。", sentence: "Global warming is the reason [  ?  ] the ice is melting. We must take action now.", a: "why", c: ["which", "who", "whom"] },
+    { id: 15, instruction: "「people's impact on frogs」の意味を選びなさい。", sentence: "Scientists are studying people's impact on frogs. They want to see how human activities change frog lives.", a: "カエルに対する人間の影響", c: ["人間に対するカエルの病気", "カエルに対する環境の役割", "人間に対するカエルの関心"] },
+    { id: 16, instruction: "「draw people's attention」の言い換えを選びなさい。", sentence: "The poster was designed to draw people's attention to the problem. The organizers want everyone to notice it.", a: "make people notice", c: ["make people angry", "make people worry", "make people leave"] },
+    { id: 17, instruction: "文中の「challenge」の意味を選びなさい。", sentence: "Finding enough clean water is the biggest challenge for the village. They are working hard to solve it.", a: "課題・困難なこと", c: ["成果・満足なこと", "娯楽・楽しいこと", "習慣・身近なこと"] },
+    { id: 18, instruction: "文中の「temperature」の意味を選びなさい。", sentence: "The temperature in this room is very high. Please turn on the air conditioner.", a: "温度・気温", c: ["湿度・空気", "面積・広さ", "明暗・明るさ"] },
+    { id: 19, instruction: "空欄に入る最も適切な前置詞を選びなさい。", sentence: "The number of cars in this town increases year [  ?  ] year. The roads are getting crowded.", a: "after", c: ["by", "to", "for"] },
+    { id: 20, instruction: "「periods without rain」の意味を選びなさい。", sentence: "Long periods without rain cause plants to die. Farmers are very worried about their crops.", a: "雨の降らない期間", c: ["雨の激しく降る期間", "雨の降り始める期間", "雨の止みそうな期間"] },
+    { id: 21, instruction: "空欄に入るディスコースマーカーを選びなさい。", sentence: "The park is very beautiful. [  ?  ], it is a great place to exercise.", a: "In addition", c: ["At first", "Although", "In response"] },
+    { id: 22, instruction: "空欄に入るディスコースマーカーを選びなさい。", sentence: "[  ?  ] it was raining, the children played outside. They had a lot of fun.", a: "Although", c: ["Besides", "In response", "In other words"] },
+    { id: 23, instruction: "空欄に入るディスコースマーカーを選びなさい。", sentence: "Reading books is fun. [  ?  ], it helps you learn new words.", a: "Besides", c: ["On the contrary", "At first", "In response"] },
+    { id: 24, instruction: "空欄に入るディスコースマーカーを選びなさい。", sentence: "He is very busy today. [  ?  ], he has no time to talk to you.", a: "In other words", c: ["Besides", "Although", "At first"] },
+    { id: 25, instruction: "空欄に入るディスコースマーカーを選びなさい。", sentence: "[  ?  ], I didn't like the food. However, it became my favorite after a few bites.", a: "At first", c: ["In addition", "On the contrary", "In response"] },
+    { id: 26, instruction: "空欄に入るディスコースマーカーを選びなさい。", sentence: "Some people thought the test was easy. [  ?  ], most students found it very difficult.", a: "On the contrary", c: ["Besides", "At first", "In response"] },
+    { id: 27, instruction: "空欄に入るディスコースマーカーを選びなさい。", sentence: "The city needed more trees. [  ?  ], the government planted 1,000 trees.", a: "In response", c: ["Although", "In other words", "At first"] },
+    { id: 28, instruction: "空欄に入る最も適切な前置詞を選びなさい。", sentence: "Eating too much sugar can lead [  ?  ] health problems. You should be careful.", a: "to", c: ["for", "in", "with"] },
+    { id: 29, instruction: "空欄に入る最も適切な単語を選びなさい。", sentence: "The heavy rain made the traffic situation [  ?  ] worse. No one could move for hours.", a: "even", c: ["more", "very", "so"] },
+    { id: 30, instruction: "文中の「population」の意味を選びなさい。", sentence: "The population of this city is growing every year. More houses are being built.", a: "人口・個体数", c: ["知名度・評判", "面積・地域", "景気・経済"] },
+    { id: 31, instruction: "文中の「certain」の意味を選びなさい。", sentence: "A certain species of bird only lives on this island. It is very rare.", a: "ある特定の", c: ["すべての", "一般的な", "有名な"] },
+    { id: 32, instruction: "文中の「several」の意味を選びなさい。", sentence: "I have visited that museum several times. Each time I learn something new.", a: "いくつかの", c: ["たくさんの", "ほとんどない", "無数の"] },
+    { id: 33, instruction: "文中の「in order to」の意味を選びなさい。", sentence: "She studied hard in order to pass the exam. Her efforts were rewarded.", a: "〜するために", c: ["〜した後に", "〜だけれども", "〜しないように"] },
+    { id: 34, instruction: "「handle the situation」の意味を選びなさい。", sentence: "The manager knew how to handle the situation. She solved the problem quickly.", a: "状況に対処する", c: ["状況を悪化させる", "状況を放置する", "状況を説明する"] },
+    { id: 35, instruction: "空欄に入る最も適切な形を選びなさい。", sentence: "The students spent three hours [  ?  ] the project. They finished it on time.", a: "working on", c: ["work on", "to work on", "worked on"] },
+    { id: 36, instruction: "文中の「pond」の意味を選びなさい。", sentence: "There are many frogs living in the small pond. The water is very still.", a: "池", c: ["海", "山", "川"] },
+    { id: 37, instruction: "文中の「closely」の意味を選びなさい。", sentence: "The doctor watched the patient closely. He wanted to see any small changes.", a: "注意深く・密接に", c: ["遠くから・大まかに", "たまに・気まぐれに", "うれしそうに・楽しそうに"] },
+    { id: 38, instruction: "文中の「wasting」の意味を選びなさい。", sentence: "We should stop wasting water when we brush our teeth. Every drop is important.", a: "無駄にする", c: ["貯めておく", "大事に使う", "きれいに拭く"] },
+    { id: 39, instruction: "空欄に入る最も適切な名詞を選びなさい。", sentence: "He practiced every day. As a [  ?  ], he won the first prize.", a: "result", c: ["reason", "purpose", "success"] },
+    { id: 40, instruction: "「For this success」の意味を選びなさい。", sentence: "The team worked together and won the game. For this success, they received a trophy.", a: "この成功に対して", c: ["この失敗に対して", "この計画に対して", "この練習に対して"] },
+    { 
+    id: 41, 
+    instruction: "「make a difference in」の意味を選びなさい。", 
+    sentence: "Small actions can make a difference in protecting nature. We should start today.", 
+    a: "〜に良い変化をもたらす（良い影響がある）", 
+    c: [
+        "〜に悪影響を及ぼす（害が生じる）", 
+        "〜に変化を与えない（意味がない）", 
+        "〜を途中で止める（無駄になる）"
+    ] 
+}
+];
+
+let currentIndex = 0;
+let firstTryCorrectCount = 0;
+let isFirstTry = true;
+let mistakes = [];
+
+function loadQuestion() {
+    if (currentIndex >= quizList.length) {
+        showResult();
+        return;
+    }
+    const current = quizList[currentIndex];
+    document.getElementById('progress').textContent = `${currentIndex + 1} / ${quizList.length}`;
+    document.getElementById('instruction-text').textContent = current.instruction;
+    document.getElementById('sentence-text').textContent = current.sentence;
+    document.getElementById('feedback').textContent = "";
+    
+    const container = document.getElementById('choices-container');
+    container.innerHTML = '';
+    isFirstTry = true;
+
+    const choices = [current.a, ...current.c].sort(() => Math.random() - 0.5);
+
+    choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.textContent = choice;
+        btn.onclick = () => checkAnswer(choice, current.a, btn);
+        container.appendChild(btn);
+    });
+}
+
+function checkAnswer(selected, correct, btn) {
+    if (selected === correct) {
+        if (isFirstTry) {
+            firstTryCorrectCount++;
+            document.getElementById('feedback').style.color = "var(--success-green)";
+            document.getElementById('feedback').textContent = "Correct!";
+        }
+        setTimeout(() => {
+            currentIndex++;
+            loadQuestion();
+        }, 600);
+    } else {
+        if (isFirstTry) {
+            mistakes.push({ num: currentIndex + 1, instruction: quizList[currentIndex].instruction, correct: quizList[currentIndex].a });
+            isFirstTry = false;
+        }
+        btn.classList.add('wrong');
+        document.getElementById('feedback').style.color = "var(--error-red)";
+        document.getElementById('feedback').textContent = "Try again!";
+    }
+}
+
+function showResult() {
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+    document.getElementById('final-score').textContent = firstTryCorrectCount;
+    document.getElementById('total-count').textContent = quizList.length;
+    if (mistakes.length > 0) {
+        document.getElementById('mistake-container').style.display = 'block';
+        document.getElementById('mistake-list').innerHTML = mistakes.map(m => `
+            <div style="margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
+                <strong>Q${m.num}: ${m.instruction}</strong><br>
+                Correct: <span style="color:var(--success-green); font-weight:bold;">${m.correct}</span>
+            </div>
+        `).join('');
+    }
+}
+
+function sendEmail() {
+    const teacherEmail = "tamaki@eigostudio-stepforward.com";
+    const subject = encodeURIComponent("【2025-2 2A】Frogsクイズ結果");
+    const body = encodeURIComponent(`Tamaki先生へ\n\n「The Decreasing Number of Frogs」語彙・文法クイズの結果です。\n\n正答数: ${firstTryCorrectCount} / ${quizList.length}\n\n間違えた箇所を復習して、読解に活かします！`);
+    window.location.href = `mailto:${teacherEmail}?subject=${subject}&body=${body}`;
+}
+
+function setupPrint() {
+    const container = document.getElementById('print-worksheet');
+    let html = `<h2>2025-2 2A - The Decreasing Number of Frogs - Quiz</h2>`;
+    quizList.forEach((q, i) => {
+        const choices = [q.a, ...q.c].sort();
+        html += `
+            <div class="print-q-block">
+                <strong>Q${i+1}. ${q.instruction}</strong>
+                <div class="print-sentence">${q.sentence}</div>
+                <div style="display:flex; gap:20px;">
+                    ${choices.map((c, idx) => `<span>(${idx+1}) ${c}</span>`).join('')}
+                </div>
+            </div>`;
+    });
+    container.innerHTML = html;
+}
+
+window.onload = () => { 
+    document.getElementById('total-count').textContent = quizList.length;
+    loadQuestion(); 
+    setupPrint(); 
+};
+</script>
+
+</body>
+</html>
